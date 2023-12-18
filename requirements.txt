@@ -1,0 +1,6 @@
+Sphinx==7.2.6
+pydata-sphinx-theme==0.14.3
+sphinx-design==0.5.0
+sphinx-inline-tabs==2023.4.21
+sphinx-copybutton==0.5.2
+openvino_sphinx_theme
