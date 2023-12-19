@@ -12,6 +12,26 @@ catch (err) {
     versions = [];
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+    // Add event listener to each toctree-toggle element
+    var toctreeToggles = document.querySelectorAll('.toctree-toggle');
+    toctreeToggles.forEach(function (toggle) {
+        toggle.addEventListener('click', function () {
+            rotateToggle(this);
+        });
+
+        // Check if the toctree-toggle is inside a toctree-l2 has-children element and apply the rotate class
+        var parentL2 = toggle.closest('.toctree-l2.has-children');
+        if (parentL2 && parentL2.contains(toggle)) {
+            toggle.classList.add('rotate');
+        }
+    });
+
+    function rotateToggle(element) {
+        element.classList.toggle('rotate');
+    }
+});
+
 /* Adobe Analytics */
 var wapLocalCode = 'us-en';
 var wapSection = 'openvinotoolkit';
