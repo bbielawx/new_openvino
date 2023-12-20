@@ -24,7 +24,6 @@
     --ost-color-sst-dropdown-background:var(--ost-color-navbar-background);
     --ost-color-sst-dropdown-background-active:var(--ost-color-primary-variant);
     /* Override Pydata Sphinx Theme Variables */
-    --pst-font-family-base: var(--ost-font-family), var(--pst-font-family-base-system);
     --pst-font-family-heading: var(--ost-font-family), var(--pst-font-family-base-system);
     --pst-font-size-base: var(--ost-font-size);
     --pst-color-sidebar-link-active: var(--ost-color-sidebar-link-active);
@@ -47,7 +46,7 @@ body {
 }
 
 .bd-sidebar .nav .active > a {
-    font-weight: 600!important;
+    font-weight: 700!important;
 }
 
 .toc-entry >.nav-link.active {
