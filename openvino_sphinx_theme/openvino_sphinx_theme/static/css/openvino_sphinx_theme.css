@@ -30,6 +30,7 @@
     --pst-color-sidebar-link-hover: var(--ost-color-sidebar-link-hover);
     --pst-color-sidebar-link: var(--ost-color-sidebar-link);
     --pst-color-primary: var(--ost-color-primary);
+    --pst-color-secondary: var(--ost-color-primary)!important;
     --pst-color-link: var(--ost-color-link);
     --pst-color-link-hover: var(--ost-color-link-hover);
     --tabs--label-text--active: var(--ost-tabs--label-text--active);

@@ -85,6 +85,7 @@ html_theme = 'openvino_sphinx_theme'
 
 html_theme_path = ['_themes']
 
+
 html_theme_options = {
     "navigation_depth": 8,
     "show_nav_level": 2,
@@ -94,9 +95,9 @@ html_theme_options = {
     "show_prev_next": False,
 }
 
-# html_sidebars = {
-#   "pagename": []
-# }
+html_sidebars = {
+    "**": ["search-field.html", "sidebar-nav-bs.html", "sidebar-ethical-ads.html"]
+}
 
 html_context = {
     'current_language': 'English',
@@ -163,10 +164,15 @@ html_css_files = [
     'css/input.css',
     'css/textfield.css',
     'css/tabs.css',
+    'css/coveo_custom.css',
+    'https://static.cloud.coveo.com/atomic/v2/themes/coveo.css',
+    'https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css',
 ]
 html_js_files = [
     'js/openvino_sphinx_theme.js',
     'js/sortable_tables.js',
+    'https://static.cloud.coveo.com/atomic/v2/atomic.esm.js',
+    'https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js',
 ]
 
 # monkeypatch sphinx api doc to prevent showing inheritance from object and enum.Enum

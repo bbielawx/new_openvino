@@ -70,6 +70,28 @@ a#wap_dns {display: none;}
 /* =================================================== */
 
 
+/* Github icon size */
+.nav-link[data-bs-original-title="GitHub"] {
+    font-size: 2rem;
+  }
+
+
+/* Right sidebar settings */
+.toc-entry a.nav-link.active {
+    background-color: transparent;
+    box-shadow: none;
+    color: black;
+    font-weight: 600;
+}
+
+/* Underline width */
+a:hover,
+.toc-entry a.nav-link:hover,
+nav.bd-links li > a:hover {
+    text-decoration-thickness: 1px;
+}
+
+
 #bd-docs-nav div ul a:hover {
     color: white;
     text-decoration: underline
