@@ -13,16 +13,14 @@ catch (err) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Add event listener to each toctree-toggle element
     var toctreeToggles = document.querySelectorAll('.toctree-toggle');
     toctreeToggles.forEach(function (toggle) {
         toggle.addEventListener('click', function () {
             rotateToggle(this);
         });
 
-        // Check if the toctree-toggle is inside a toctree-l2 has-children element and apply the rotate class
-        var parentL2 = toggle.closest('.toctree-l2.has-children');
-        if (parentL2 && parentL2.contains(toggle)) {
+        var parentElement = toggle.parentElement;
+        if (!parentElement || !parentElement.parentElement || !parentElement.parentElement.classList.contains('current')) {
             toggle.classList.add('rotate');
         }
     });
