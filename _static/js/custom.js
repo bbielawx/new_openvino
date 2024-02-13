@@ -13,16 +13,14 @@ catch (err) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Add event listener to each toctree-toggle element
     var toctreeToggles = document.querySelectorAll('.toctree-toggle');
     toctreeToggles.forEach(function (toggle) {
         toggle.addEventListener('click', function () {
             rotateToggle(this);
         });
 
-        // Check if the toctree-toggle is inside a toctree-l2 has-children element and apply the rotate class
-        var parentL2 = toggle.closest('.toctree-l2.has-children');
-        if (parentL2 && parentL2.contains(toggle)) {
+        var parentElement = toggle.parentElement;
+        if (!parentElement || !parentElement.parentElement || !parentElement.parentElement.classList.contains('current')) {
             toggle.classList.add('rotate');
         }
     });
@@ -31,6 +29,36 @@ document.addEventListener('DOMContentLoaded', function () {
         element.classList.toggle('rotate');
     }
 });
+
+document.addEventListener('click', () => {
+    const ddMs = document.querySelectorAll('.dropdown-menu');
+    ddMs.forEach((dm) => {
+        dm.parentElement.classList.remove('show');
+        dm.classList.remove('show');
+    });
+});
+ 
+document.addEventListener('DOMContentLoaded', function () {
+    var dropdownButtons = document.querySelectorAll('.sst-btn');
+    dropdownButtons.forEach((ddBtn) => {
+        ddBtn.parentElement.classList.remove('show');
+        ddBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            ddBtn.parentElement.classList.toggle('show');
+            showMenuToggle();
+        });
+    });
+ 
+    function showMenuToggle() {
+        const ddMs = document.querySelectorAll('.dropdown-menu');
+        ddMs.forEach((dm) => {
+            dm.parentElement.classList.contains('show')
+                ? dm.classList.add('show')
+                : dm.classList.remove('show');
+        });
+    }
+});
+
 
 /* Adobe Analytics */
 var wapLocalCode = 'us-en';

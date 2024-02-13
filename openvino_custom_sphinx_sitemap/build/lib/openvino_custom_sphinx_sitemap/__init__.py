@@ -51,7 +51,7 @@ def create_sitemap(app, exception):
         for item in urlset:
             root.set(*item)
 
-    get_locales(app, exception)
+    get_locales(app)
 
     if app.builder.config.version:
         version = app.builder.config.version + '/'
