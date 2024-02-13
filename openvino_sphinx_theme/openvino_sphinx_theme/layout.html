@@ -28,6 +28,7 @@ or not theme_secondary_sidebar_items %}
   {# The data-cfasync attribute disables CloudFlare's Rocket loader so that #}
   {# mode/theme are correctly set before the browser renders the page. #}
   {# https://github.com/pydata/pydata-sphinx-theme/pull/1045 #}
+  <script type="module" src="https://static.cloud.coveo.com/atomic/v2/atomic.esm.js"></script>
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "{{ default_mode }}";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
@@ -129,6 +130,7 @@ or not theme_secondary_sidebar_items %}
             {% block docs_toc %}
               {% if not remove_sidebar_secondary %}
                 <div class="bd-sidebar-secondary bd-toc">{% include "sections/sidebar-secondary.html" %}</div>
+                {% include "edit-this-page.html" %}
               {% endif %}
             {% endblock docs_toc %}
           </div>

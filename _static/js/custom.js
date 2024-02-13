@@ -30,6 +30,36 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+document.addEventListener('click', () => {
+    const ddMs = document.querySelectorAll('.dropdown-menu');
+    ddMs.forEach((dm) => {
+        dm.parentElement.classList.remove('show');
+        dm.classList.remove('show');
+    });
+});
+ 
+document.addEventListener('DOMContentLoaded', function () {
+    var dropdownButtons = document.querySelectorAll('.sst-btn');
+    dropdownButtons.forEach((ddBtn) => {
+        ddBtn.parentElement.classList.remove('show');
+        ddBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            ddBtn.parentElement.classList.toggle('show');
+            showMenuToggle();
+        });
+    });
+ 
+    function showMenuToggle() {
+        const ddMs = document.querySelectorAll('.dropdown-menu');
+        ddMs.forEach((dm) => {
+            dm.parentElement.classList.contains('show')
+                ? dm.classList.add('show')
+                : dm.classList.remove('show');
+        });
+    }
+});
+
+
 /* Adobe Analytics */
 var wapLocalCode = 'us-en';
 var wapSection = 'openvinotoolkit';

@@ -11,6 +11,7 @@ import sys
 import json
 import shutil
 from sphinx.util import logging
+from sphinx.application import Sphinx
 from json import JSONDecodeError
 from sphinx.ext.autodoc import ClassDocumenter
 
@@ -89,7 +90,7 @@ html_theme_path = ['_themes']
 html_theme_options = {
     "navigation_depth": 8,
     "show_nav_level": 2,
-    # "use_edit_page_button": True,
+    "use_edit_page_button": True,
     "github_url": "https://github.com/openvinotoolkit/openvino",
     # "footer_items": ["footer_info"],
     "show_prev_next": False,
@@ -104,10 +105,6 @@ html_context = {
     'languages': (('English', '/latest'), ('Chinese', '/cn/latest')),
     'doxygen_mapping_file': '@DOXYGEN_MAPPING_FILE@',
     'doxygen_snippet_root': '@OpenVINO_SOURCE_DIR@',
-    # "github_user": "openvinotoolkit",
-    # "github_repo": "openvino",
-    # "github_version": "master",
-    # "doc_path": "/docs",
 }
 
 repositories = {
@@ -165,14 +162,23 @@ html_css_files = [
     'css/textfield.css',
     'css/tabs.css',
     'css/coveo_custom.css',
-    'https://static.cloud.coveo.com/atomic/v2/themes/coveo.css',
-    'https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css',
+    'css/coveo.css',
+    'css/splide.min.css',
 ]
+
 html_js_files = [
+    'js/jquery.min.js',
     'js/openvino_sphinx_theme.js',
     'js/sortable_tables.js',
-    'https://static.cloud.coveo.com/atomic/v2/atomic.esm.js',
-    'https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js',
+    'js/graphs.js',
+    'js/graphs_ov_tf.js',
+    'js/gsearch.js',
+    'js/hide_banner.js',
+    'js/newsletter.js',
+    'js/open_sidebar.js',
+    'js/papaparse.min.js',
+    'js/viewer.min.js',
+    'js/custom.js',
 ]
 
 # monkeypatch sphinx api doc to prevent showing inheritance from object and enum.Enum
@@ -183,6 +189,8 @@ def add_line_no_base_object(self, line, *args, **kwargs):
         return
     else:
         add_line(self, line, *args, **kwargs)
+
+
 
 
 ClassDocumenter.add_line = add_line_no_base_object
@@ -205,9 +213,14 @@ def setup(app):
                          doxygen_mapping_file, rebuild=True)
     app.add_config_value('repositories', repositories, rebuild=True)
     app.connect('autodoc-skip-member', autodoc_skip_member)
-    # app.connect('build-finished', replace_index_with_redirect)
-    # app.connect('build-finished', replace_design_tabs_script)
-    app.add_js_file('js/custom.js')
+    app.add_js_file('https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js')
+    app.add_js_file('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+    app.add_js_file('https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js')
+    app.add_js_file("https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels")
+    app.add_js_file("https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js")
+    app.add_js_file("https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js")
+    app.add_js_file("https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1")
+    app.add_js_file("https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js")
     app.add_js_file('js/graphs.js')
     app.add_js_file('js/newsletter.js')
     app.add_js_file('js/graphs_ov_tf.js')
