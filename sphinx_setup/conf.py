@@ -31,7 +31,7 @@ extensions = [
     'sphinx_design',
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
-    # 'openvino_custom_sphinx_sitemap',
+    'openvino_custom_sphinx_sitemap',
     'myst_parser',
     'breathe'
     ]
@@ -114,7 +114,7 @@ html_sidebars = {
 html_context = {
     'current_language': 'English',
     'languages': (('English', '/latest'), ('Chinese', '/cn/latest')),
-    'doxygen_mapping_file': '@DOXYGEN_MAPPING_FILE@',
+    'doxygen_mapping_file': r'C:\Users\bbielawx\OneDrive - Intel Corporation\Desktop\OpenVINO\build\mapping.json',
     'doxygen_snippet_root': snippet_root,
 }
 
@@ -153,6 +153,7 @@ repositories = {
 
 try:
     doxygen_mapping_file = '@DOXYGEN_MAPPING_FILE@'
+    doxygen_mapping_file = r'C:\Users\bbielawx\OneDrive - Intel Corporation\Desktop\OpenVINO\build\mapping.json'
     with open(doxygen_mapping_file, 'r', encoding='utf-8') as f:
         doxygen_mapping_file = json.load(f)
 except JSONDecodeError:
@@ -173,17 +174,20 @@ html_css_files = [
     'css/textfield.css',
     'css/tabs.css',
     'css/coveo_custom.css',
+    'https://static.cloud.coveo.com/atomic/v2/themes/coveo.css',
+    'https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css',
 ]
 
 html_js_files = [
-    'js/jquery.min.js',
-    'js/splide.min.js',
-    'js/Chart.min.js',
-    'js/chartjs-plugin-datalabels.js',
-    'js/chartjs-plugin-annotation.min.js',
-    'js/Plugin.Barchart.Background.min.js'
-    'js/chartjs-plugin-deferred@1.js'
+    'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js',
+    'https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js',
+    'https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels',
+    'https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js',
+    'https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js',
+    'https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1',
+    'https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js',
     'js/openvino_sphinx_theme.js',
+    'js/splide.min.js',
     'js/sortable_tables.js',
     'js/graphs.js',
     'js/graphs_ov_tf.js',
@@ -206,8 +210,6 @@ def add_line_no_base_object(self, line, *args, **kwargs):
         add_line(self, line, *args, **kwargs)
 
 
-
-
 ClassDocumenter.add_line = add_line_no_base_object
 
 # OpenVINO Python API Reference Configuration
@@ -218,9 +220,6 @@ exclude_pyapi_methods = ('__weakref__',
                          'add_openvino_libs_to_path'
                          )
 
-
-# shutil.copy("../../../docs/index.rst",".")
-# shutil.copy("../../docs/index.rst",".")
 
 def autodoc_skip_member(app, what, name, obj, skip, options):
     return name in exclude_pyapi_methods

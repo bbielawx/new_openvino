@@ -1,5 +1,6 @@
 import os
 import json
+import sys
 from json import JSONDecodeError
 from sphinx.errors import ExtensionError
 import jinja2
@@ -99,7 +100,7 @@ def setup(app):
     static_path = os.path.join(theme_path, 'static')
     app.config.templates_path.append(templates_path)
     app.config.html_static_path.append(static_path)
-    # app.connect("html-page-context", setup_edit_url, priority=sys.maxsize)
+    app.connect("html-page-context", setup_edit_url, priority=sys.maxsize)
     app.connect('env-before-read-docs', read_doxygen_configs)
     app.add_html_theme('openvino_sphinx_theme', theme_path)
     rst.directives.register_directive('doxygensnippet', DoxygenSnippet)

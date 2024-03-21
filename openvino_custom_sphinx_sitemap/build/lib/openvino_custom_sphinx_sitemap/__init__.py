@@ -1,4 +1,6 @@
 import xml.etree.ElementTree as ET
+import queue
+from pathlib import Path
 from sphinx_sitemap import setup as base_setup, get_locales, hreflang_formatter
 
 
@@ -51,14 +53,19 @@ def create_sitemap(app, exception):
         for item in urlset:
             root.set(*item)
 
-    get_locales(app)
+    locales = get_locales(app)
 
     if app.builder.config.version:
         version = app.builder.config.version + '/'
     else:
         version = ""
+    
+    while True:
+        try:
+            link = app.env.app.sitemap_links.get_nowait()  # type: ignore
+        except queue.Empty:
+            break
 
-    for link in app.sitemap_links:
         url = ET.SubElement(root, "url")
         scheme = app.config.sitemap_url_scheme
         if app.builder.config.language:
@@ -77,8 +84,8 @@ def create_sitemap(app, exception):
                 for tag_name, tag_value in values.items():
                     ET.SubElement(namespace_element, tag_name).text = tag_value
 
-        if len(app.locales) > 0:
-            for lang in app.locales:
+        if len(locales) > 0:
+            for lang in locales:
                 lang = lang + '/'
                 linktag = ET.SubElement(
                     url,
@@ -90,7 +97,7 @@ def create_sitemap(app, exception):
                     lang=lang, version=version, link=link
                 ))
 
-    filename = app.outdir + "/" + app.config.sitemap_filename
+    filename = Path(app.outdir) / app.config.sitemap_filename
     ET.ElementTree(root).write(filename,
                                xml_declaration=True,
                                encoding='utf-8',
